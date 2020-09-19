@@ -61,18 +61,18 @@ CREATE TABLE LOCATIONS(
 CREATE TABLE MESSAGES(
     ts_creation TIMESTAMP NOT NULL DEFAULT NOW()::TIMESTAMP,
     row_id SERIAL NOT NULL,
-    user_id INTEGER NOT NULL,
-    doctor_id INTEGER NOT NULL,
+    transmitter_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL,
     content VARCHAR(MAX) NOT NULL,
     CONSTRAINT MESSAGES_PK
         PRIMARY KEY (row_id),
     CONSTRAINT MESSAGES_FK_USERS_1
-        FOREIGN KEY (user_id)
+        FOREIGN KEY (transmitter_id)
         REFERENCES USERS(row_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT MESSAGES_FK_USERS_2
-        FOREIGN KEY (doctor_id)
+        FOREIGN KEY (receiver_id)
         REFERENCES USERS(row_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
