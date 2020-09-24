@@ -1,7 +1,11 @@
-const express = require('express');
 const cors = require('cors');
-const config = require('./config/config')
+const express = require('express');
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const config = require('./config/config')
+require('./controllers/socket_controller')(io);
+
 
 app.use(cors(config.application.cors.server));
 app.use(express.urlencoded({extended:false}));
@@ -17,8 +21,11 @@ app.use((req, res, next) => {
 
 //ROUTES
 app.use('/api/user/auth', require('./routes/auth'));
+// app.use('/api/chat/', require('./routes/chat'));
 
 //SETTINGS
 app.set('port', config.API_PORT || 4000);
+app.set('socketIo', io);
+app.set('server', server);
 
 module.exports = app;

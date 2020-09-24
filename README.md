@@ -11,7 +11,7 @@ By default, the Docker will expose port 4000, so you can change this if necessar
 cd server
 docker build -t www-server .
 ```
-This will create the Corona Tracking image and pull in the necessary dependencies.
+This will create the Corona Tracking REST API image and pull in the necessary dependencies.
 
 Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 4000 of the host to port 4000 of the Docker
 
