@@ -1,7 +1,8 @@
 const app = require('./app');
 
-async function main() {
-    await app.listen(app.get('port'));
-    console.log(`Server on port ${app.get('port')}`);
+function main() {
+    // app.listen(app.get('port'));
+    app.get('server').listen(app.get('port'));
+    console.log(`Server with sockets on port ${app.get('port')}`);
 }
 main();
