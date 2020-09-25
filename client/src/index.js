@@ -2,7 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
+
+
 import './global.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import  'jquery';
+import 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+// import $ from 'jquery';
+// import Popper from 'popper.js';
+
 import App from './components/App';
 
 const container = document.getElementById('root');

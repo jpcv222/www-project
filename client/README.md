@@ -10,6 +10,7 @@ Once installed, run the Docker image, you will need to execute this command:
 
 ```sh
 cd client
+docker-compose build
 docker-compose up
 ```
 You will see how it creates the container according to Dockerfile and runs it with the definition of docker-compose.yml
@@ -18,7 +19,10 @@ You will see how it creates the container according to Dockerfile and runs it wi
 You can run `docker-compose up` with the `-d` flag to run it in the background, in that case to stop it you must run the command `docker-compose down`
 
 ```sh
+cd client
+docker-compose build
 docker-compose -d up
+"Only if you want to stop it"
 docker-compose down
 ```
 
@@ -26,4 +30,15 @@ Verify the development environment by navigating to your server address in your 
 
 ```sh
 127.0.0.1:3000
+```
+
+### NEW DEPENDENCES
+
+IF NEW DEPENDENCES ARE ADDED, THESE COMMANDS SHOULD BE THROWN IN THIS SAME ORDER:
+
+```sh
+cd client
+docker-compose down -v 
+docker-compose build   
+docker-compose up
 ```

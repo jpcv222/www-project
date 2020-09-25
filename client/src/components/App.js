@@ -17,7 +17,7 @@ function App() {
   });
   return (
     <div>
-      <button onClick={enviar}> enviar a servidor</button>
+      <button className="btn-success btn" onClick={enviar}> enviar a servidor</button>
     </div>
   );
 }
