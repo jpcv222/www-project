@@ -37,7 +37,7 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
 
                     <div className="navbar-nav nav-pills">
-                        <Link className="nav-bar-item nav-item nav-link active-spa navbar_link"  to="/Inicio" id="Inicio">Inicio</Link>
+                        <Link className="nav-bar-item nav-item nav-link active-spa navbar_link"  to="/" id="Inicio">Inicio</Link>
                         <Link className="nav-bar-item nav-item nav-link navbar_link"  to="/GestionCitas" id="GestionCitas">Gestion Citas</Link>
                         <Link className="nav-bar-item nav-item nav-link navbar_link"  to="/GestionUsuarios" id="GestionUsuarios">Gestion Usuarios</Link>
                         <Link className="nav-bar-item nav-item nav-link navbar_link"  to="/GestionPerfiles" id="GestionPerfiles">Gestion Perfiles</Link>

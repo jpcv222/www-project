@@ -6,7 +6,11 @@ function Layout(props) {
   return (
     <React.Fragment>
       <Header />
-      {props.children}
+      <div className="container-fluit tracking_content">
+        <div className="p-5">
+          {props.children}
+        </div>
+      </div>
     </React.Fragment>
   );
 }
