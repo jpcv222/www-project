@@ -1,24 +1,20 @@
 import React from 'react';
-import socket from '../utils/Socket';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import Layout from './Layout';
+import Home from '../pages/Home';
+import NotFound from '../pages/NotFound';
 
 function App() {
-
-  socket.emit('conectado', "Hello from client")
-
-  // socket.emit('mensaje', 'jeffrey', 'Hola desde chat')
-
-  const enviar = () =>{
-    socket.emit('mensaje', 'jeffrey', 'Hola desde chat')
-  }
-
-  socket.on('mensajes', mensaje => {
-    alert("desde servidor " + mensaje.mensaje);
-  });
   return (
-    <div>
-      <button className="btn-success btn" onClick={enviar}> enviar a servidor</button>
-    </div>
+    <BrowserRouter>
+      <Layout>
+      < Switch >
+        <Route exact path="/" component={Home} />
+        <Route component={NotFound} />
+      </Switch >
+      </Layout>
+    </BrowserRouter >
   );
 }
 
