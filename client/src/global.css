@@ -8,8 +8,16 @@
 }
 
 body {
+  margin: 0;
   font-family: 'Lato', 'Helvetica Neue', sans-serif;
   background-color: #F4F4F7;
+
+}
+
+.tracking_content{
+  /* box-shadow: 0px 0px 5px; */
+  min-height: 750px;
+  padding-top: 105px;
 }
 
 h1 {
@@ -71,4 +79,19 @@ a.link-unstyled:hover {
 
 .btn.btn-danger:not(:disabled):not(.disabled):focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 64, 64, 0.5);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border: 39px none #ffffff;
 }
