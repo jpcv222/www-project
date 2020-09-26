@@ -1,0 +1,21 @@
+.navbar_spa {
+    margin: 0;
+    list-style: none;
+    background-color: #1b262c;
+    padding-left: 150px;
+    border-bottom: 5px solid #f0a500;
+}
+#navbar_link{
+    color: white;
+}
+.navbar_span {
+    color: rgba(0, 0, 0, 0);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #f0a500;
+}
