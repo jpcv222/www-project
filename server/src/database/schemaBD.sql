@@ -63,7 +63,7 @@ CREATE TABLE MESSAGES(
     row_id SERIAL NOT NULL,
     transmitter_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
-    content VARCHAR(MAX) NOT NULL,
+    content TEXT NOT NULL,
     CONSTRAINT MESSAGES_PK
         PRIMARY KEY (row_id),
     CONSTRAINT MESSAGES_FK_USERS_1
