@@ -3,7 +3,7 @@ const resources_controller = require('../resources/resources_controller');
 
 chat_controller.test = async (req, res) => {
     try {
-        // var io = req.app.get('socketIo');
+        // let io = req.app.get('socketIo');
 
     } catch (error) {
         console.log(error)
