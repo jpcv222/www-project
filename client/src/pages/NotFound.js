@@ -1,11 +1,12 @@
 import React from 'react';
 
 import './styles/NotFound.css';
+import NotFound404 from '../components/NotFound';
 
 function NotFound() {
   return (
     <React.Fragment>
-        IMAGEN 404 Y LINK A HOME
+        <NotFound404/>
     </React.Fragment>
   );
   
