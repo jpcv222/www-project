@@ -1,3 +1,4 @@
+import md5 from 'md5';
 const resources_controller = {};
 
 resources_controller.localeFunc = (number, index, total_sec) => {
@@ -66,6 +67,14 @@ resources_controller.Empty = (data) =>{
         return true;
     }else{
         return false;
+    }
+}
+
+resources_controller.Encrypt = (data) =>{
+    try {
+        return md5(data);
+    } catch (error) {
+        console.log(error.message)
     }
 }
 

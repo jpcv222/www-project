@@ -17,6 +17,10 @@ export default class Index extends Component {
         identification: "",
         password: ""
     }
+
+    componentDidMount(){
+    }
+
     handleChange = e => {
         this.setState({
             ...this.state.form,
@@ -31,7 +35,7 @@ export default class Index extends Component {
             this.setState({ loading: true });
             const data = {
                 identification: this.state.identification,
-                password: this.state.password
+                password: resources_controller.Encrypt(this.state.password)
             }
 
             try {
