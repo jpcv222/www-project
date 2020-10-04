@@ -26,6 +26,11 @@ export default class header extends Component {
         });
     };
 
+    cerrarSession = () => {
+        sessionStorage.clear();
+        window.location.href = '/';
+    }
+
     render() {
         return (
 
@@ -36,25 +41,31 @@ export default class header extends Component {
                             <img alt="" src={logo} title="ValentinSpa" className="img-logo" />
                         </Link>
                     </div>
-
-                    <div className="profile-menu">
-                        <div className="btn-group tx-profilemenu dropdown">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Nombre usuario
-                            </button>
-                            <div className="dropdown-menu " aria-labelledby="dropdownMenuButton" role="menu">
-                                <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
-                                <Link
-                                    className="nav-link"
-                                >
-                                    Cerrar sesion
-                                </Link>
+                    {sessionStorage.getItem("token") ? (
+                        <React.Fragment>
+                            <div className="profile-menu">
+                                <div className="btn-group tx-profilemenu dropdown">
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Nombre usuario
+                                </button>
+                                    <div className="dropdown-menu " aria-labelledby="dropdownMenuButton" role="menu">
+                                        <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
+                                        <Link
+                                            className="nav-link"
+                                            onClick={() => this.cerrarSession()}
+                                        >
+                                            Cerrar sesion
+                                    </Link>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+
+                        </React.Fragment>
+                    ) : (
+                            <span className="navbar-brand mx-auto" >Corona Tracking</span>
+                        )}
 
                     <Navbar />
-
                 </div>
             </div>
         );

@@ -30,18 +30,26 @@ class Navbar extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light navbar_spa" >
+
                 <span className="navbar_span">/</span>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
+
                 <div className="collapse navbar-collapse" id="navbarNav">
 
                     <div className="navbar-nav nav-pills">
-                        <Link className="nav-bar-item nav-item nav-link active-spa navbar_link"  to="/" id="Inicio">Inicio</Link>
-                        <Link className="nav-bar-item nav-item nav-link navbar_link"  to="/GestionCitas" id="GestionCitas">Gestion Citas</Link>
-                        <Link className="nav-bar-item nav-item nav-link navbar_link"  to="/GestionUsuarios" id="GestionUsuarios">Gestion Usuarios</Link>
-                        <Link className="nav-bar-item nav-item nav-link navbar_link"  to="/GestionPerfiles" id="GestionPerfiles">Gestion Perfiles</Link>
-                    </div> 
+                        {sessionStorage.getItem("token") ? (
+                            <React.Fragment>
+                                <Link className="nav-bar-item nav-item nav-link active-spa navbar_link" to="/Home" id="Inicio">Inicio</Link>
+                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/GestionCitas" id="GestionCitas">Gestion Citas</Link>
+                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/GestionUsuarios" id="GestionUsuarios">Gestion Usuarios</Link>
+                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/GestionPerfiles" id="GestionPerfiles">Gestion Perfiles</Link>
+                            </React.Fragment>
+                        ) : (
+                                null
+                            )}
+                    </div>
 
                 </div>
             </nav >
