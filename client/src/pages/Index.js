@@ -45,8 +45,8 @@ export default class Index extends Component {
                     }
                 });
 
-                if (res.data.status === "error") {    
-                    this.setState({ loading: false });              
+                if (res.data.status === "error") {
+                    this.setState({ loading: false });
                     validations.ErrorMessage(res.data.status, res.data.description, res.data.id, res.data.traza);
                 } else {
                     resources_controller.SetSession(res.data);
@@ -57,16 +57,16 @@ export default class Index extends Component {
                             validations.ErrorMessage("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, err.message);
                         } else {
                             resources_controller.SetSession(decoded);
+                            window.location.href = '/Home';
+                            // this.setState({ loading: false });
                         }
-                    });                   
-                    window.location.href = '/Home';
+                    });
                     
+
                 }
             } catch (error) {
                 this.setState({ loading: false });
                 validations.ErrorMessage("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, error.message);
-            }finally{
-                this.setState({ loading: false });
             }
         } else {
             validations.FieldError();
