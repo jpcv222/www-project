@@ -95,3 +95,15 @@ a.link-unstyled:hover {
   background: gray;
   border: 39px none #ffffff;
 }
+
+.btn.btn_www{
+  color: #fff;
+  background-color: #f0a500;
+  border-color: #f0a500;
+}
+
+.btn.btn_www:not(:disabled):not(.disabled):hover {
+  color: #fff;
+  background-color: #f0a500;
+  border-color: #f0a500;
+}
