@@ -26,6 +26,14 @@ resources_controller.SetSession = (data) => {
     }
 };
 
+resources_controller.ModifySession = (key, data) => {
+    sessionStorage.setItem(key, data);
+};
+
+resources_controller.GetSession = (key) => {
+    return sessionStorage.getItem(key);
+};
+
 resources_controller.isoToDate = (iso) => {
 
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -62,15 +70,15 @@ resources_controller.dateToTs = (date) => {
     return formatted_date;
 }
 
-resources_controller.Empty = (data) =>{
-    if(data === "" || data === null){
+resources_controller.Empty = (data) => {
+    if (data === "" || data === null) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
-resources_controller.Encrypt = (data) =>{
+resources_controller.Encrypt = (data) => {
     try {
         return md5(data);
     } catch (error) {
