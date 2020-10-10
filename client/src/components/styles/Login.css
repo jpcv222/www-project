@@ -6,11 +6,16 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-#btn-login{
-    background-color: #f0a500;
-    color: white;
+#btn-login {
+  background-color: #f0a500;
+  color: white;
+}
+
+.card_www{
+  width: 350px;
+  height: 350px;
 }

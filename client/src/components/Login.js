@@ -11,7 +11,7 @@ export default class Login extends Component {
         return (
             <div className="row">
 
-                <form onSubmit={this.props.onSubmit} className="col-md-a mx-auto shadow-lg p-3 mb-5 bg-white rounded">
+                <form onSubmit={this.props.onSubmit} className="col-md-a mx-auto card card_www" > 
 
                     <div className="text-center  p-5">
                         <p className="h4 mb-4">Inicio de sesion</p>
@@ -45,6 +45,7 @@ export default class Login extends Component {
 
                     </div>
                 </form>
+
             </div>
         )
     }
