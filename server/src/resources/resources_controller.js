@@ -5,7 +5,11 @@ resources_controller.ESTADO_USUARIO = {
     INACTIVO: 0,
     NO_EXISTE: 1,
     DATOS_INCORRECTOS: 2,
+    EMAIL_EXISTE: -1,
+    IDENTIFICATION_EXISTE: -2,
+    YA_ASIGNADO: -3
 }
+
 
 // Funcion para obtener el json del recurso para enviar al Cliente 
 // el parametro traza sera opcional para cuando se llame un recurso
@@ -37,5 +41,16 @@ resources_controller.leerRecurso = (keymsg, traza = "") => {
         console.log(error);
     }
 };
+
+resources_controller.validarIdentification = (number) => {
+    if ((!isNaN(number)) &&
+        (number.toString().length >= 7) &&
+        (number.toString().length <= 10) &&
+        (number > 0)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 module.exports = resources_controller;

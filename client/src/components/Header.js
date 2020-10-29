@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import logo from '../images/gps.svg';
 
 import './styles/Header.css'
+
+import resources_controller from '../resources/resources_controller'
 export default class header extends Component {
     constructor() {
         super();
@@ -46,10 +48,10 @@ export default class header extends Component {
                             <div className="profile-menu">
                                 <div className="btn-group tx-profilemenu dropdown">
                                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Nombre usuario
+                                        {resources_controller.GetSession("name")}
                                 </button>
                                     <div className="dropdown-menu " aria-labelledby="dropdownMenuButton" role="menu">
-                                        <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
+                                        <Link className="nav-link" to="/MyProfile">Mi Perfil</Link>
                                         <Link
                                             className="nav-link"
                                             onClick={() => this.cerrarSession()}

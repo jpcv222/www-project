@@ -1,5 +1,15 @@
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import alertify from 'alertifyjs'
+import 'alertifyjs/build/alertify.min.js'
+import 'alertifyjs/build/css/alertify.min.css'
+import 'alertifyjs/build/css/themes/default.min.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure()
+alertify.set('notifier', 'position', 'top-right');
+
 
 const validationController = {};
 
@@ -16,7 +26,31 @@ validationController.confirmacion = async () => {
     })
 
 };
+validationController.ErrorToast = (msg, traza = "", id = "") => {
+    let mensaje = traza != "" && traza != null ? '🙁 ' + msg + ", " + traza : '🙁 ' + msg
+    toast.error(mensaje, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    console.log(id);
+}
 
+validationController.SuccessToast = (msg) => {
+    toast.success('😀 ' + msg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+}
 validationController.SuccessMessage = (estado, descripcion, id) => {
     Swal.fire({
         // position: 'top-end',

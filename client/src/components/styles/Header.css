@@ -2,12 +2,12 @@
 
 .active {
     visibility: visible;
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 
 .hidden {
     visibility: hidden;
-    transition: all 0.5s;
+    transition: all 0.3s;
     transform: translateY(-100%);
 }
 
@@ -32,7 +32,10 @@
 
 .active-spa {
     color: white !important;
-    background-color: #f0a500;
+    border-radius: 0px !important;
+    /* background-color: #f0a500; */
+    border-bottom: 2px solid #f0a500;
+    /* color: #f0a500 !important; */
   }
   
   .logo {
@@ -62,10 +65,6 @@
   }
   
   
-  #dropdownMenuButton {
-    height: 33px;
-  }
-  
   .update-spa-icon{
     font-size: x-large;
     position: absolute;
@@ -90,10 +89,12 @@
   
   #dropdownMenuButton {
     height: 33px;
-    margin-top: 3px;
-    background-color: transparent;
-    border:1px solid white;
-    width: 200px;
+    margin-top: 0px;
+    background-color: transparent !important;
+    /* border:1px solid white; */
+    width: 250px;
+    border-radius: 2px;
+    box-shadow: none !important;
 }
 
 
@@ -148,4 +149,8 @@ a:hover {
     width: 100%;
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
+}
+
+.navbar-toggler-icon{
+  color:white
 }

@@ -5,6 +5,9 @@ import Layout from './Layout';
 import Home from '../pages/Home';
 import Index from '../pages/Index';
 import NotFound from '../pages/NotFound';
+import UserManagement from '../pages/UserManagement';
+import Chat from '../pages/ChatContainer';
+import MyProfile from '../pages/MyProfile';
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
       < Switch >
         <Route exact path="/" component={Index} />
         <Route exact path="/Home" component={Home} />
+        <Route exact path="/UserManagement" component={UserManagement} />
+        <Route exact path="/Chat" component={Chat} />
+        <Route exact path="/MyProfile" component={MyProfile} />
         <Route component={NotFound} />
       </Switch >
       </Layout>

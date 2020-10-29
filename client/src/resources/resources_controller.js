@@ -1,6 +1,22 @@
 import md5 from 'md5';
+import validations from './validations/main'
 const resources_controller = {};
 
+resources_controller.USER_ROL_NAME = {
+    SUPER_USER: "SuperUsuario",
+    DOCTOR: "Doctor",
+    PACIENTE: "Paciente"
+}
+resources_controller.USER_ROL_NUMBER = {
+    SUPER_USER: 0,
+    DOCTOR: 1,
+    PACIENTE: 2
+}
+resources_controller.USER_MODAL_ACTION = {
+    see: 0,
+    update: 1,
+    insert: 2
+}
 resources_controller.localeFunc = (number, index, total_sec) => {
     return [
         ['justo ahora', 'ahora mismo'],
@@ -86,5 +102,152 @@ resources_controller.Encrypt = (data) => {
     }
 }
 
+resources_controller.CambiarFechaJson = (valorABuscar, json) => {
+    json.forEach(function (elemento) {
+        elemento[valorABuscar] = resources_controller.isoToDateSecs(new Date(elemento[valorABuscar]))
+    })
+}
+
+resources_controller.getNumbers = (str) => {
+    return str.replace(/^\D+/g, '');
+}
+
+resources_controller.getLocation = () => {
+    if (navigator.geolocation) {
+        validations.SuccessToast("Tu dispositivo soporta la geolocalizacion");
+        navigator.geolocation.getCurrentPosition(showPosition, LocationError);
+    } else {
+        validations.ErrorToast("Tu dispositivo no soporta la geolocalizacion");
+    }
+
+}
+
+function showPosition(position) {
+    resources_controller.ModifySession("latitude", position.coords.latitude);
+    resources_controller.ModifySession("longitude", position.coords.longitude);
+}
+
+function LocationError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            validations.ErrorToast("El usuario ha denegado el permiso a la localización.")
+            break;
+        case error.POSITION_UNAVAILABLE:
+            validations.ErrorToast("La información de la localización no está disponible.")
+            break;
+        case error.TIMEOUT:
+            validations.ErrorToast("El tiempo de espera para buscar la localización ha expirado.")
+            break;
+        case error.UNKNOWN_ERROR:
+            validations.ErrorToast("Ha ocurrido un error desconocido.")
+            break;
+    }
+}
+
+resources_controller.ValidateUser = (user) => {
+    try {
+        let results = [], result = true;
+        results.push(!validateEmptyField(user.name));
+        results.push(!validateEmptyField(user.lastname));
+        results.push(!validateEmptyField(user.identification));
+        results.push(!validateEmptyField(user.password));
+        results.push(validateSelect(user.role));
+        results.push(validateEmail(user.email));
+
+        for (var element in results) {
+            result = result && results[element];
+        };
+        if (!result) {
+            validations.ErrorToast('Campos incorrectos, revise el formulario de registro');
+        } else {
+            if (resources_controller.GetSession("latitude") && resources_controller.GetSession("longitude")) {
+                if (FieldIsBlank(resources_controller.GetSession("latitude")) || FieldIsBlank(resources_controller.GetSession("longitude"))) {
+                    validations.ErrorToast('Debe Permitir obtener la ubicacion');
+                    result = false;
+                }
+            } else {
+                validations.ErrorToast('Debe Permitir obtener la ubicacion');
+                result = false;
+            }
+        }
+        return result;
+    } catch (error) {
+        validations.ErrorToast(error.message)
+    }
+}
+
+resources_controller.ValidateLocation = () => {
+    try {
+        let result = true;
+        if (resources_controller.GetSession("latitude") && resources_controller.GetSession("longitude")) {
+            if (FieldIsBlank(resources_controller.GetSession("latitude")) || FieldIsBlank(resources_controller.GetSession("longitude"))) {            
+                validations.ErrorToast('Debe Permitir obtener la ubicacion');
+                result = false;
+            }
+        } else {
+            validations.ErrorToast('Debe Permitir obtener la ubicacion');
+            result = false;
+        }
+        return result;
+    } catch (error) {
+        validations.ErrorToast(error.message)
+        return false;
+    }
+}
+
+resources_controller.ValidateUserUpdate = (user) => {
+    try {
+        let results = [], result = true;
+        results.push(!validateEmptyField(user.name));
+        results.push(!validateEmptyField(user.lastname));
+        results.push(!validateEmptyField(user.identification));
+        results.push(validateSelect(user.role));
+        results.push(validateEmail(user.email));
+
+        for (var element in results) {
+            result = result && results[element];
+        };
+        if (!result) {
+            validations.ErrorToast('Campos incorrectos, revise el formulario de registro');
+        }
+        return result;
+    } catch (error) {
+        validations.ErrorToast(error.message)
+    }
+}
+resources_controller.FieldIsBlank2 = (field) => {
+    if (field === null || field === "") {
+        return true;
+    }
+};
+function validateEmptyField(field) {
+    var re = /^\s+$/;
+    return re.test(field) || field === null || field === "";
+};
+function FieldIsBlank(field) {
+    if (field === null || field === "") {
+        return true;
+    }
+};
+function validateSelect2(field) {
+    var re = /^[1-9]+[0-9]*$/;
+    return re.test(field);
+};
+function validateSelect(field) {
+    try {
+        if(isNaN(parseInt(field))){
+            return false;            
+        }else{
+            return true;
+        }
+    } catch (error) {
+        return false;
+    }
+};
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};
 
 export default resources_controller;

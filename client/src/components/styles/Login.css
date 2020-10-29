@@ -17,5 +17,15 @@ input[type="number"] {
 
 .card_www{
   width: 350px;
-  height: 350px;
+  height: 450px;
+
+  border-radius: 0px !important;
 }
+
+.singUp{
+  cursor: pointer;
+}
+/* 
+.button_row{
+  margin-top: 95px;
+} */

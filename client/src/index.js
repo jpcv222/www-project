@@ -9,7 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import  'jquery';
 import 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import 'mdbreact/dist/css/mdb.css';
+import 'mdbreact/dist/mdbreact';
+// import 'mdbreact/dist/mdbreact.esm';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 // import $ from 'jquery';
 // import Popper from 'popper.js';
 
