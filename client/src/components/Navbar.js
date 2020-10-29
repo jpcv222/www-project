@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/Navbar.css';
 import $ from 'jquery';
-
+import resources_controller from '../resources/resources_controller'
 
 
 
@@ -20,7 +20,7 @@ class Navbar extends React.Component {
         $(".nav-bar-item").each(function () {
             let id = $(this).attr("id");
             if (window.location.toString().includes(id)) {
-                $("#Inicio").removeClass("active-spa");
+                $("#Home").removeClass("active-spa");
                 $("#" + id).removeClass("active-spa");
                 $("#" + id).addClass("active-spa");
             }
@@ -39,17 +39,21 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
 
                     <div className="navbar-nav nav-pills">
-                        {sessionStorage.getItem("token") ? (
+                        {resources_controller.GetSession("token") &&
                             <React.Fragment>
-                                <Link className="nav-bar-item nav-item nav-link active-spa navbar_link" to="/Home" id="Inicio">Inicio</Link>
-                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/GestionCitas" id="GestionCitas">Gestion Citas</Link>
-                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/GestionUsuarios" id="GestionUsuarios">Gestion Usuarios</Link>
-                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/GestionPerfiles" id="GestionPerfiles">Gestion Perfiles</Link>
+                                <Link className="nav-bar-item nav-item nav-link active-spa navbar_link" to="/Home" id="Home">Inicio</Link>
+                                {(parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.SUPER_USER ||
+                                    parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) ?
+                                    <Link className="nav-bar-item nav-item nav-link navbar_link" to="/UserManagement" id="UserManagement">Gestion Usuarios</Link>
+                                    :
+                                    null
+                                }
+                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/Chat" id="Chat">Chat</Link>
+
                             </React.Fragment>
-                        ) : (
-                                null
-                            )}
+                        }
                     </div>
+                    
 
                 </div>
             </nav >

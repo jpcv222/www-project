@@ -1,0 +1,23 @@
+.www_select{
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0px;
+    color:#757575 !important;
+}
+
+.www_select:focus{
+    border-color: cornflowerblue;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.www_select>option{
+    color: #757575 !important;
+    border:none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.fa-edit{
+    cursor: pointer;
+}
