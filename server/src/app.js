@@ -20,7 +20,9 @@ app.use((req, res, next) => {
 });
 
 //ROUTES
+app.use(require('./middlewares/auth_token'));
 app.use('/api/user/auth', require('./routes/auth'));
+app.use('/api/user/manage', require('./routes/user_manage'));
 // app.use('/api/chat/', require('./routes/chat'));
 
 //SETTINGS
