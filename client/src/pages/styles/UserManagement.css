@@ -1,0 +1,12 @@
+.actions{
+    /* position: fixed; */
+    /* z-index: 9999; */
+     margin-top: 30%;
+    max-width: 50px;
+}
+
+.actions>span{
+    float: right;
+    margin-bottom: 5px;
+    cursor: pointer;
+}

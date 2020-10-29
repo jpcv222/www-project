@@ -1,0 +1,12 @@
+.btn2{
+    border-radius: 50px;
+}
+
+.fa-disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#btn-location{
+    background-color: #f0a500 !important;
+}
