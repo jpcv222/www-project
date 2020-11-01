@@ -12,7 +12,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'mdbreact/dist/css/mdb.css';
 import 'mdbreact/dist/mdbreact';
 // import 'mdbreact/dist/mdbreact.esm';
-import '@fontawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 // import $ from 'jquery';
 // import Popper from 'popper.js';
 
