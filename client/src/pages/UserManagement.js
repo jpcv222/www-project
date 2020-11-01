@@ -10,6 +10,7 @@ import Loading from './Loading';
 import DataTable from '../components/DataTable'
 import resources_controller from '../resources/resources_controller'
 import { MDBIcon, MDBTooltip } from "mdbreact";
+import socket from '../utils/Socket'
 
 const config = require('../config/config')
 export default class user_management extends Component {
@@ -20,6 +21,7 @@ export default class user_management extends Component {
             await this.getUsers()
             resources_controller.ModifySession("latitude", "");
             resources_controller.ModifySession("longitude", "");
+            socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
         }
     }
 

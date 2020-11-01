@@ -37,6 +37,7 @@ userController.getUsers = async (req, res) => {
 
 userController.createUser = async (req, res) => {
     try {
+        console.log(req.body)
         if (resources_controller.validarIdentification(req.body.identification)) {
             await connection.connect(async (err, client, done) => {
                 try {
@@ -326,6 +327,39 @@ userController.updateLocation = async (req, res) => {
     } catch (error) {
         await client.query("ROLLBACK");
         res.json(resources_controller.leerRecurso(1027, error.message));
+    }
+}
+
+userController.getPatientsLocations = async (req, res) => {
+    try {
+        let query = {
+            text: `SELECT * FROM f_get_users_locations($1,$2) `,
+            values: [req.body.role, req.body.row_id]
+        };
+        await connection.connect(async (err, client, done) => {
+            try {
+                if (err) {
+                    res.json(resources_controller.leerRecurso(1031, err.message));
+                } else {
+                    await client.query(query, async (err, results) => {
+                        if (err) {
+                            await client.query("ROLLBACK");
+                            res.json(resources_controller.leerRecurso(1031, err.message));
+                        } else {
+
+                            res.status(200).json(results.rows);
+
+                        }
+                    });
+                }
+            } finally {
+                done();
+                query = {};
+            }
+        });
+
+    } catch (error) {
+        res.json(resources_controller.leerRecurso(1031, error.message));
     }
 }
 

@@ -20,9 +20,9 @@ resources_controller.USER_MODAL_ACTION = {
 resources_controller.localeFunc = (number, index, total_sec) => {
     return [
         ['justo ahora', 'ahora mismo'],
-        ['%s segundos atrás', 'en %s segundos'],
-        ['Hace 1 minuto', 'en 1 minuto'],
-        ['%s minutos atrás', 'en %s minutos'],
+        ['%s seg atrás', 'en %s seg'],
+        ['Hace 1 min', 'en 1 min'],
+        ['%s mins atrás', 'en %s mins'],
         ['Hace 1 hora', 'en 1 hora'],
         ['%s horas', 'en %s horas'],
         ['Hace 1 día', 'en 1 día'],

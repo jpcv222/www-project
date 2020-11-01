@@ -1,10 +1,13 @@
 const { Router } = require('express');
 const router = Router();
 
-const chatController = require('../controllers/api_socket_controller');
+const chatController = require('../controllers/chat_controller');
 
 
-router.route('/test')
-    .post(chatController.test)
+router.route('/getFriendList')
+    .post(chatController.getFriendList)
+
+router.route('/getMessages')
+    .post(chatController.getMessages)
 
 module.exports = router;
