@@ -51,6 +51,19 @@ validationController.SuccessToast = (msg) => {
         progress: undefined,
     });
 }
+
+validationController.InfoToast = (msg) => {
+    toast.info('💬 ' + msg, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+}
+
 validationController.SuccessMessage = (estado, descripcion, id) => {
     Swal.fire({
         // position: 'top-end',
