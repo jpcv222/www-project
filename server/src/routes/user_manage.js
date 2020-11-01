@@ -28,4 +28,7 @@ router.route('/updatePassword/:id')
 router.route('/updateLocation/:id')
     .post(userController.updateLocation)
 
+router.route('/getPatientsLocations')
+    .post(userController.getPatientsLocations)
+
 module.exports = router;

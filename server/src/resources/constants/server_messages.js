@@ -107,5 +107,21 @@ module.exports = {
         id: 1027,
         description: "Error al actualizar la ubicacion",
         status: "error"
+    },1028:{
+        id: 1028,
+        description: "Error al obtener las conversaciones",
+        status: "error"
+    },1029:{
+        id: 1029,
+        description: "Error al enviar y guardar el mensaje",
+        status: "error"
+    },1030:{
+        id: 1030,
+        description: "Error al obtener los mensajes de esta conversacion",
+        status: "error"
+    },1031:{
+        id: 1031,
+        description: "Error al obtener los pacientes",
+        status: "error"
     },
 }
