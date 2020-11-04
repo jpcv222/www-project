@@ -6,7 +6,8 @@ import Home from '../pages/Home';
 import Index from '../pages/Index';
 import NotFound from '../pages/NotFound';
 import UserManagement from '../pages/UserManagement';
-import Chat from '../pages/ChatContainer';
+import Chat from '../pages/ChatContainer2';
+// import Chat from '../pages/ChatContainer';
 import MyProfile from '../pages/MyProfile';
 
 function App() {

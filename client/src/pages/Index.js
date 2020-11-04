@@ -9,6 +9,8 @@ import Loading from './Loading';
 import Login from "../components/Login";
 import Carousel from '../components/Carousel'
 
+// import socket from '../utils/Socket'
+
 
 const config = require('../config/config')
 const jwt = require("jsonwebtoken");
@@ -85,6 +87,7 @@ export default class Index extends Component {
                         } else {
                             resources_controller.SetSession(decoded);
                             window.location.href = '/Home'
+                            // socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
                         }
                     });
 
