@@ -1,6 +1,6 @@
 import React from 'react'
 import './styles/Home.css'
-import socket from '../utils/Socket'
+// import socket from '../utils/Socket'
 import resources_controller from '../resources/resources_controller'
 import validations from '../resources/validations/main'
 import { MDBIcon } from "mdbreact";
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
-            socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
+            // socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
             if(parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR){
                 await this.GetPatients();
             }

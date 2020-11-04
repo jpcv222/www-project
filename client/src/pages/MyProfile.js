@@ -10,7 +10,7 @@ import Loading from './Loading';
 import Map from '../components/Map';
 
 import './styles/MyProfile.css'
-import socket from '../utils/Socket'
+// import socket from '../utils/Socket'
 const config = require('../config/config')
 
 export default class MyProfile extends Component {
@@ -18,7 +18,7 @@ export default class MyProfile extends Component {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
-            socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
+            // socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
         }
     }
     state = {
