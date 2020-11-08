@@ -123,5 +123,17 @@ module.exports = {
         id: 1031,
         description: "Error al obtener los pacientes",
         status: "error"
+    },1032:{
+        id: 1032,
+        description: "Error al obtener las notificaciones",
+        status: "error"
+    },1033:{
+        id: 1033,
+        description: "Error al marcar la notificacion como leida",
+        status: "error"
+    },1034:{
+        id: 1034,
+        description: "notificacion marcada como leida con exito",
+        status: "success"
     },
 }

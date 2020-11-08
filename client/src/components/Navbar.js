@@ -4,7 +4,7 @@ import './styles/Navbar.css';
 import $ from 'jquery';
 import resources_controller from '../resources/resources_controller'
 
-
+import { MDBIcon, MDBBtn, MDBBadge } from "mdbreact";
 
 class Navbar extends React.Component {
     async componentDidMount() {
@@ -48,12 +48,19 @@ class Navbar extends React.Component {
                                     :
                                     null
                                 }
-                                <Link className="nav-bar-item nav-item nav-link navbar_link" to="/Chat" id="Chat">Chat</Link>
+                                {(parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.PACIENTE ||
+                                    parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) ?
+                                    <Link className="nav-bar-item nav-item nav-link navbar_link" to="/Chat" id="Chat">Chat</Link>
+                                    :
+                                    null
+                                }
+                                
+
+
 
                             </React.Fragment>
                         }
                     </div>
-                    
 
                 </div>
             </nav >

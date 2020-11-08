@@ -24,6 +24,7 @@ app.use(require('./middlewares/auth_token'));
 app.use('/api/user/auth', require('./routes/auth'));
 app.use('/api/user/manage', require('./routes/user_manage'));
 app.use('/api/chat/user', require('./routes/chat'));
+app.use('/api/alerts/user', require('./routes/alerts'));
 
 //SETTINGS
 app.set('port', config.API_PORT || 4000);
