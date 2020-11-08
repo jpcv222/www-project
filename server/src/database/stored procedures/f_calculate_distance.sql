@@ -11,8 +11,8 @@ RETURNS float AS $dist$
         radlat2 float;
         theta float;
         radtheta float;
-        v_house_latitude float,
-        v_house_longitude float,
+        v_house_latitude float;
+        v_house_longitude float;
     BEGIN
         SELECT house_longitude  INTO v_house_longitude  FROM USERS WHERE row_id = row_id_user;
         SELECT house_latitude   INTO v_house_latitude   FROM USERS WHERE row_id = row_id_user;
@@ -32,13 +32,14 @@ RETURNS float AS $dist$
             dist = dist * 180 / pi();
             dist = dist * 60 * 1.1515;
 
-            IF units = 'K' THEN dist = dist * 1.609344; END IF;
-            IF units = 'N' THEN dist = dist * 0.8684; END IF;
-            IF units = 'M' THEN dist = dist * 1609.34 END IF;
+            IF units = 'K' THEN dist = ROUND(dist * 1.609344);  END IF;
+            IF units = 'N' THEN dist = ROUND(dist * 0.8684);    END IF;
+			IF units = 'M' THEN dist = ROUND(dist * 1609.34);   END IF;
 
             RETURN dist;
         END IF;
     END;
 $dist$ LANGUAGE plpgsql;
 
-SELECT f_calculate_distance(4.570868, -74.297333, 35.86166, 104.195397, 'K');
+-- DISTANCIA ENTRE COLOMBIA Y RUSIA (PRUEBA)
+-- SELECT f_calcular_distancia from f_calcular_distancia(4.570868, -74.297333, 61.52401, 105.318756, 'K');

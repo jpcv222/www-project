@@ -115,19 +115,19 @@ resources_controller.getNumbers = (str) => {
 resources_controller.getLocation = () => {
     if (navigator.geolocation) {
         validations.SuccessToast("Tu dispositivo soporta la geolocalizacion");
-        navigator.geolocation.getCurrentPosition(showPosition, LocationError);
+        navigator.geolocation.getCurrentPosition(showPosition, LocationError,{enableHighAccuracy:true});
     } else {
         validations.ErrorToast("Tu dispositivo no soporta la geolocalizacion");
     }
 
 }
 
-function showPosition(position) {
+const showPosition = (position) =>{
     resources_controller.ModifySession("latitude", position.coords.latitude);
     resources_controller.ModifySession("longitude", position.coords.longitude);
 }
 
-function LocationError(error) {
+const LocationError = (error) => {
     switch (error.code) {
         case error.PERMISSION_DENIED:
             validations.ErrorToast("El usuario ha denegado el permiso a la localización.")

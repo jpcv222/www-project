@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION f_validate_auth(in_json_txt JSON)
         DECLARE
             err_context TEXT;
             v_err_code INTEGER := 0; /*0 inactivo, 1 no existe, 2 datos incorrectos, 3 existe, activo y correcto*/
-            v_identification INTEGER;
+            v_identification BIGINT;
 			v_password TEXT;
             v_active INTEGER;
             CONST_INACTIVO INTEGER := 0;        
@@ -15,7 +15,7 @@ CREATE OR REPLACE FUNCTION f_validate_auth(in_json_txt JSON)
     SELECT identification 
         INTO v_identification 
         FROM json_to_record(in_json_txt) 
-            AS x(identification INTEGER);
+            AS x(identification BIGINT);
 
         IF EXISTS (
             SELECT  1 

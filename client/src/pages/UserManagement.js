@@ -503,6 +503,7 @@ export default class user_management extends Component {
                 <DataTable
                     datatable={this.state.datatable}
                     onCheckboxChange={this.onCheckboxChange}
+                    check={true}
                 />
                 <UpdateReadModal
                     show={this.state.manageUserModalShow}

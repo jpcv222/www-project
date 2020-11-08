@@ -9,14 +9,14 @@ import Loading from './Loading';
 import Login from "../components/Login";
 import Carousel from '../components/Carousel'
 
-// import socket from '../utils/Socket'
+import { MDBIcon, MDBTooltip } from "mdbreact";
 
 
 const config = require('../config/config')
 const jwt = require("jsonwebtoken");
 
 export default class Index extends Component {
-    componentDidMount(){
+    componentDidMount() {
         resources_controller.ModifySession("latitude", "");
         resources_controller.ModifySession("longitude", "");
     }
@@ -56,48 +56,54 @@ export default class Index extends Component {
         e.preventDefault();
         if (!resources_controller.Empty(this.state.identification) &&
             !resources_controller.Empty(this.state.password)) {
+            if (resources_controller.ValidateLocation()) {
 
-            try {
-                const data = {
-                    identification: this.state.identification,
-                    password: resources_controller.Encrypt(this.state.password)
-                }
-
-                this.setState({ loading: true });
-                const res = await axios.post(config.QUERY_SERVER_URI + "api/user/auth/login", data, {
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8'
+                try {
+                    const data = {
+                        identification: this.state.identification,
+                        password: resources_controller.Encrypt(this.state.password),
+                        current_latitude: parseFloat(resources_controller.GetSession("latitude")),
+                        current_longitude: parseFloat(resources_controller.GetSession("longitude"))
                     }
-                });
+                    console.log(data)
 
-                if (res.data.status === "error") {
-                    this.setState({
-                        loading: false
-                    });
-                    validations.ErrorToast(res.data.description, res.data.traza, res.data.id)
-                } else {
-                    resources_controller.SetSession(res.data);
-
-                    jwt.verify(res.data.token.toString(), config.ENCRYPTION_SECRET_KEY, (err, decoded) => {
-                        if (err) {
-                            this.setState({
-                                loading: false
-                            });
-                            validations.ErrorToast("Ha ocurrido un error", err.message)
-                        } else {
-                            resources_controller.SetSession(decoded);
-                            window.location.href = '/Home'
-                            // socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
+                    this.setState({ loading: true });
+                    const res = await axios.post(config.QUERY_SERVER_URI + "api/user/auth/login", data, {
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8'
                         }
                     });
 
+                    if (res.data.status === "error") {
+                        this.setState({
+                            loading: false
+                        });
+                        validations.ErrorToast(res.data.description, res.data.traza, res.data.id)
+                    } else {
+                        resources_controller.SetSession(res.data);
 
+                        jwt.verify(res.data.token.toString(), config.ENCRYPTION_SECRET_KEY, (err, decoded) => {
+                            if (err) {
+                                this.setState({
+                                    loading: false
+                                });
+                                validations.ErrorToast("Ha ocurrido un error", err.message)
+                            } else {
+                                resources_controller.SetSession(decoded);
+                                window.location.href = '/Home'
+                                resources_controller.ModifySession("latitude", "");
+                                resources_controller.ModifySession("longitude", "");
+                            }
+                        });
+
+
+                    }
+                } catch (error) {
+                    this.setState({
+                        loading: false
+                    });
+                    validations.ErrorToast("Ha ocurrido un error", error.message)
                 }
-            } catch (error) {
-                this.setState({
-                    loading: false
-                });
-                validations.ErrorToast("Ha ocurrido un error", error.message)
             }
         } else {
             validations.ErrorToast("Campos obligatorios")
@@ -128,7 +134,7 @@ export default class Index extends Component {
                         form: {
                             ...this.state.form,
                             password: ""
-                        }                   
+                        }
                     });
                     validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
                 } else {
@@ -191,29 +197,39 @@ export default class Index extends Component {
         }
 
         return (
-            
-            <div className="row " >
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 padding-0">
-                    <Carousel/>
+            <React.Fragment>
+                <div className="row" >
+                    <MDBTooltip domElement tag="span" placement="top">
+                        <div className="col-lg-1 col-md-1 col-sm-12 col-xs-12 mb-1 float-right">
+                            <button onClick={() => resources_controller.getLocation()} className="btn btn-primary btn2" id="btn-location">
+                                <MDBIcon icon="map-marked-alt" size="2x" />
+                            </button>
+                        </div>
+                        <span>Obtener ubicacion</span>
+                    </MDBTooltip>
                 </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-0">
-                    <Login
-                        onSubmit={this.handleSubmit}
-                        onChange={this.handleChange}
-                        identification={this.state.identification}
-                        password={this.state.password}
+                <div className="row " >
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 padding-0">
+                        <Carousel />
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-0">
+                        <Login
+                            onSubmit={this.handleSubmit}
+                            onChange={this.handleChange}
+                            identification={this.state.identification}
+                            password={this.state.password}
 
-                        show={this.state.manageUserModalShow}
-                        onHide={this.onHideModal}
-                        title={this.state.modalTitle}
-                        handleChangeForm={this.handleChangeForm}
-                        form={this.state.form}
-                        handleSignUp={this.handleSignUp}
-                        onOpen={this.handleInsertModal}
-                    />
+                            show={this.state.manageUserModalShow}
+                            onHide={this.onHideModal}
+                            title={this.state.modalTitle}
+                            handleChangeForm={this.handleChangeForm}
+                            form={this.state.form}
+                            handleSignUp={this.handleSignUp}
+                            onOpen={this.handleInsertModal}
+                        />
+                    </div>
                 </div>
-            </div>
-
+            </React.Fragment>
 
         );
     }

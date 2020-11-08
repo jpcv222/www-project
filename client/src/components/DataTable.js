@@ -17,7 +17,7 @@ export default class DataTable extends React.Component {
                     searchTop
                     searchBottom={false}
                     materialSearch 
-                    checkbox
+                    checkbox={this.props.check}
                     headCheckboxID='id2'
                     bodyCheckboxID='checkboxes2'
                     getValueCheckBox={(e) => {

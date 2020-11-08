@@ -10,7 +10,7 @@ const Chat = (props) => {
     const divRef = useRef(null);
     useEffect(() => {
         divRef.current.scrollIntoView({ behavior: 'smooth' })
-    })
+    },[props.messages])
 
     return (
         <div>
@@ -61,7 +61,9 @@ const Chat = (props) => {
                                         <small class="text-muted">{format(message.ts_creation, 'es_ES')}</small>
                                     </div>
                                     <div className="col">
+                                        <p className="content_msg">
                                         {message.content}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
