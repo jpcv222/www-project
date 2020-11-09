@@ -117,7 +117,7 @@ resources_controller.Encrypt = (data) => {
 
 resources_controller.CambiarFechaJson = (valorABuscar, json) => {
     json.forEach(function (elemento) {
-        elemento[valorABuscar] = resources_controller.isoToDateSecs(new Date(elemento[valorABuscar]))
+        elemento[valorABuscar] = resources_controller.FormatDateAMPM(new Date(elemento[valorABuscar]))
     })
 }
 
