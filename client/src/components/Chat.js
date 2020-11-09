@@ -58,7 +58,9 @@ const Chat = (props) => {
                             <div className="row" key={message.row_id}>
                                 <div className={message.transmitter_id === parseInt(resources_controller.GetSession("row_id")) ? "msg_enviado" : "msg_recibido"}>
                                     <div className="col text-right">
-                                        <small class="text-muted">{format(message.ts_creation, 'es_ES')}</small>
+                                        {/* <small class="text-muted">{format(message.ts_creation, 'es_ES')}</small> */}
+                                        <small class="text-muted">{resources_controller.FormatDateAMPM(message.ts_creation)}</small>
+                                        
                                     </div>
                                     <div className="col">
                                         <p className="content_msg">
