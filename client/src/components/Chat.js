@@ -39,7 +39,7 @@ const Chat = (props) => {
                                     <li onClick={() => props.getConversation(friend)} className="list-group-item" key={friend.row_id} style={{ cursor: "pointer" }}>
                                         {friend.conversation_name}
                                         <div className="float-right">
-                                            <small class="text-muted">{format(friend.ts_creation, 'es_ES')}</small>
+                                            <small class="text-muted">{resources_controller.FormatDateAMPM(friend.ts_creation)}</small>
                                         </div>
                                     </li>
                                 ))
