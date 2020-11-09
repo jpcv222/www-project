@@ -22,7 +22,7 @@ export default class UserNotificationsModal extends Component {
                                     {notification.content}
                                     <div className="float-right">
                                         <small class="text-muted notification_date">
-                                            {resources_controller.isoToDateSecs(notification.ts_creation)}
+                                            {resources_controller.FormatDateAMPM(notification.ts_creation)}
                                         </small>
 
                                         {notification.seen_ind === 0 &&
