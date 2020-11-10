@@ -27,8 +27,9 @@ BEGIN
                   FROM USERS_EXT
                WHERE doctor_id = in_row_id_user
             ) ORDER BY 
-               user_id, 
-               ts_creation DESC
+               ts_creation DESC,
+               user_id
+               
          LOOP
          RETURN NEXT reg;
          END LOOP;
