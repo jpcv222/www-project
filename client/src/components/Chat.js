@@ -13,7 +13,7 @@ const Chat = (props) => {
     },[props.messages])
 
     return (
-        <div>
+        <div className="mt-5">
             <div className="row" >
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-0">
                     <div className="chat_header list-group-item" id="chat_header">
