@@ -14,7 +14,7 @@ export default class Login extends Component {
         return (
 
             <div className="row" >
-                <form onSubmit={this.props.onSubmit} className=" card card_www" >
+                <form onSubmit={this.props.onSubmit} className="col-md-a mx-auto card card_www" >
 
                     <div className=" p-4">
                         <p className="h4 mb-4">Acceda a Corona Tracking</p>
