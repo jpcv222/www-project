@@ -208,11 +208,12 @@ export default class Index extends Component {
                         <span>Obtener ubicacion</span>
                     </MDBTooltip>
                 </div>
-                <div className="row " >
+                {/* <div className="row " >
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 padding-0">
                         <Carousel />
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-0">
+                    <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding-0"> */}
+                    <div className="col-md-a mx-auto">
                         <Login
                             onSubmit={this.handleSubmit}
                             onChange={this.handleChange}
@@ -227,8 +228,9 @@ export default class Index extends Component {
                             handleSignUp={this.handleSignUp}
                             onOpen={this.handleInsertModal}
                         />
-                    </div>
-                </div>
+                        </div>
+                    {/* </div>
+                </div> */}
             </React.Fragment>
 
         );
