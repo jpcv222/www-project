@@ -15,7 +15,7 @@ export default function ChatContainer() {
     const [conversation, setConversation] = useState({});
     const [mensajeActual, setMensajeActual] = useState({});
     const [textArea, setTextArea] = useState("");
-    const [objError, setObjError] = useState({});
+    const [emojiClick, setEmojiClick] = useState(false);
 
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
@@ -49,6 +49,20 @@ export default function ChatContainer() {
         });
         return () => { socket.off() }
     }, [messages])
+
+    const onOpenEmoji = () => {
+        if (emojiClick) {
+            setEmojiClick(false)
+        } else {
+            setEmojiClick(true)
+        }
+
+    }
+
+    const onEmojiClick = (event, emojiObject) => {
+        setTextArea(textArea + "" + emojiObject.emoji);
+        document.getElementById("textarea").focus();
+    }
 
     const getMessages = async (conversation_id) => {
         try {
@@ -106,20 +120,24 @@ export default function ChatContainer() {
     }
 
     const sendMessageEnter = async (e) => {
-        if (e.keyCode === 13) {
-            if (!e.shiftKey) {
-                const message = {};
-                message.content = textArea;
-                message.conversation_id = parseInt(conversation.row_id);
-                message.receiver_id = parseInt(conversation.receiver_id);
-                message.transmitter_id = parseInt(resources_controller.GetSession("row_id"));
-                message.transmitter_name = resources_controller.GetSession("name")
-                message.ts_creation = new Date()
-                setMessages([...messages, message])
-                socket.emit('privateMessage', message);
-                setTextArea("")
+        if (!resources_controller.FieldIsBlank2(textArea)) {
+            if (e.keyCode === 13) {
+                if (!e.shiftKey) {
+                    const message = {};
+                    message.content = textArea;
+                    message.conversation_id = parseInt(conversation.row_id);
+                    message.receiver_id = parseInt(conversation.receiver_id);
+                    message.transmitter_id = parseInt(resources_controller.GetSession("row_id"));
+                    message.transmitter_name = resources_controller.GetSession("name")
+                    message.ts_creation = new Date()
+                    setMessages([...messages, message])
+                    socket.emit('privateMessage', message);
+                    setTextArea("")
+                    setEmojiClick(false)
+                }
             }
         }
+
 
     }
     const onSubmit = async (e) => {
@@ -134,11 +152,16 @@ export default function ChatContainer() {
         setMessages([...messages, message])
         socket.emit('privateMessage', message);
         setTextArea("")
+        setEmojiClick(false)
     }
 
     const OnChangeTextArea = e => {
-        setTextArea(e.target.value);
+        if (e.target.value != "\n") {
+            setTextArea(e.target.value);
+        }
+        
     };
+
     return (
         <Chat
             friendList={friendList}
@@ -150,6 +173,10 @@ export default function ChatContainer() {
             newMessage={mensajeActual}
             OnChangeTextArea={OnChangeTextArea}
             textArea={textArea}
+
+            emojiClick={emojiClick}
+            onOpenEmoji={onOpenEmoji}
+            onEmojiClick={onEmojiClick}
         />
     )
 
