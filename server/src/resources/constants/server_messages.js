@@ -135,5 +135,9 @@ module.exports = {
         id: 1034,
         description: "notificacion marcada como leida con exito",
         status: "success"
+    },1035:{
+        id: 1035,
+        description: "Error al obtener la informacion de los reportes",
+        status: "error"
     },
 }
