@@ -31,4 +31,7 @@ router.route('/updateLocation/:id')
 router.route('/getPatientsLocations')
     .post(userController.getPatientsLocations)
 
+router.route('/getLogs')
+    .post(userController.getLogs)
+
 module.exports = router;

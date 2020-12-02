@@ -17,6 +17,7 @@ BEGIN
         SELECT password INTO v_password FROM json_to_record(in_json_txt) AS x(password TEXT);
 
         PERFORM  f_generate_alert(v_current_latitude,v_current_longitude,v_rowid_user);
+        PERFORM  f_insert_log(v_rowid_user,'login');
 
         FOR REG IN
             SELECT *
