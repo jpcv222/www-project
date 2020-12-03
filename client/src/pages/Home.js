@@ -13,20 +13,77 @@ const config = require('../config/config');
 export default class Home extends React.Component {
     state = {
         patients: [],
-        datatable:{},
+        datatable: {},
         checkbox: {},
+        datatable_logs: {}
     }
 
     async componentDidMount() {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
-            
+
             // socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
             if (parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) {
                 await this.GetPatients();
                 await this.GetPatientsAlerts();
+                await this.GetLogs();
             }
+        }
+    }
+
+    GetLogs = async () => {
+        try {
+            const data = {};
+            data.role = resources_controller.GetSession("role");
+            data.row_id = resources_controller.GetSession("row_id");
+
+            const res = await axios.post(config.QUERY_SERVER_URI + `api/user/manage/getLogs`, data, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Bearer ${this.state.token}`
+                }
+            });
+
+            if (res.data.status === "error") {
+                validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
+            } else {
+                const data = res.data;
+                resources_controller.CambiarFechaJson("last_login", data);
+                console.log(data);
+
+                this.setState({
+                    datatable_logs: {
+                        columns: [
+
+                            {
+                                label: 'Identificacion',
+                                field: 'identification',
+                                width: 270,
+                            },
+                            {
+                                label: 'Nombre',
+                                field: 'name',
+                                width: 270,
+                            },
+                            {
+                                label: 'Inicios de sesión',
+                                field: 'login_count',
+                                width: 270,
+                            },
+                            {
+                                label: 'Último login',
+                                field: 'last_login',
+                                width: 270,
+                            }
+                        ],
+                        rows: data
+                    }
+                });
+            }
+
+        } catch (error) {
+            validations.ErrorToast("Ha ocurrido un error", error.message)
         }
     }
 
@@ -55,6 +112,7 @@ export default class Home extends React.Component {
             validations.ErrorToast("Ha ocurrido un error", error.message)
         }
     }
+
     GetPatientsAlerts = async () => {
         try {
             const data = {};
@@ -90,7 +148,7 @@ export default class Home extends React.Component {
                                 label: 'Nombre',
                                 field: 'name',
                                 width: 270,
-                            },                        
+                            },
                             {
                                 label: 'Mensaje de alerta',
                                 field: 'content',
@@ -142,6 +200,18 @@ export default class Home extends React.Component {
                             onCheckboxChange={this.onCheckboxChange}
                             check={false}
                         />
+
+                        <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12 mb-1">
+                            <hr></hr>
+                            <p class="h2">Reporte de sesiones</p>
+                            <DataTable
+                            datatable={this.state.datatable_logs}
+                            onCheckboxChange={this.onCheckboxChange}
+                            check={false}
+                        />
+                        </div>
+
+                       
                     </React.Fragment>
                 }
             </React.Fragment>
