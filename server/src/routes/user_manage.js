@@ -34,4 +34,10 @@ router.route('/getPatientsLocations')
 router.route('/getLogs')
     .post(userController.getLogs)
 
+router.route('/getAllLogs')
+    .post(userController.getAllLogs)
+
+router.route('/getAllAlerts')
+    .post(userController.getAllAlerts)
+
 module.exports = router;
