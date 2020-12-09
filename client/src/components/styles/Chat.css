@@ -1,0 +1,75 @@
+.chat_header {
+  border-radius: 0px !important;
+}
+
+#chat_header {
+  background-color: #1b262c;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  height: 56.5px;
+  color: white;
+}
+.friendList {
+  height: auto;
+  max-height: 412px;
+  overflow-y: auto;
+}
+.msg_container {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  height: 350px;
+  max-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* padding: 0, 1rem, 0, 1rem; */
+}
+
+.padding-0 {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.msg_recibido {
+  background-color: #1b262c;
+  color: white;
+  padding: 5px;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  /* max-height: 200px; */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: 30px;
+}
+
+.msg_enviado {
+  background-color: #f0a500;
+  color: white;
+  padding: 5px;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  /* max-height: 200px; */
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  margin-left: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.badge_mas {
+  background-color: #f0a500;
+}
+
+.content_msg {
+  word-wrap: break-word;
+}
+
+.emoji {
+  padding: 0px !important;
+  margin: 0px !important;
+}

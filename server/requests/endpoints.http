@@ -1,0 +1,66 @@
+@base_url = http://localhost:4000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0c19jcmVhdGlvbiI6IjIwMjAtMTAtMjNUMjM6MTY6NTkuMTg5WiIsInJvd19pZCI6MiwibmFtZSI6IkRvY3RvciBqZWZmcmV5IiwibGFzdG5hbWUiOiJEb2N0b3IiLCJpZGVudGlmaWNhdGlvbiI6IjExMTExMTEiLCJlbWFpbCI6IkRvY3RvckBEb2N0b3IuY29tIiwicGFzc3dvcmQiOiIyMDJjYjk2MmFjNTkwNzViOTY0YjA3MTUyZDIzNGI3MCIsInJvbGUiOjEsImhvdXNlX2FkZHJlc3MiOiIiLCJob3VzZV9sb25naXR1ZGUiOi03Ni41MjMyLCJob3VzZV9sYXRpdHVkZSI6My40Mzg0LCJhY3RpdmVfaW5kIjoxLCJpYXQiOjE2MDcxMzQ0Mzh9.vzN36z9TgyAQDppEP5lTQfZ1nK2mt-jrd2qgnX4vXCo
+
+###########################################
+#                   LOGIN                 #
+###########################################
+POST {{base_url}}/api/user/auth/login
+Content-Type: application/json;charset=UTF-8
+
+{
+    "identification": 1111111,
+    "password": "202cb962ac59075b964b07152d234b70"
+}
+
+###########################################
+#           USER MANAGEMENT               #
+###########################################
+
+POST {{base_url}}/api/user/manage/getUsers
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {{token}}
+
+{
+    "role": 0,
+    "row_id": 2
+}
+
+###
+
+POST {{base_url}}/api/user/manage/insertUser
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {{token}}
+
+{
+    "name":"prueba",
+    "lastname":"prueba",
+    "identification":6664448,
+    "email":"prueba666@gmail.com",
+    "password":"202cb962ac59075b964b07152d234b70",
+    "role":2,
+    "house_address":"",
+    "house_longitude":3.42158,
+    "house_latitude":-76.5205
+}
+
+###
+
+POST {{base_url}}/api/user/manage/updateUser/2
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {{token}}
+
+{
+    "name":"Doctor",
+    "lastname":"Doctor",
+    "identification":1111111,
+    "email":"Doctor@Doctor.com",
+    "role":1
+}
+
+###########################################
+#                   LOGS                  #
+###########################################
+
+POST {{base_url}}/api/user/manage/getLogs
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {{token}}

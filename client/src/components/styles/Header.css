@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Sansita+Swashed:wght@300&display=swap");
+
+.active {
+  visibility: visible;
+  transition: all 0.3s;
+}
+
+.hidden {
+  visibility: hidden;
+  transition: all 0.3s;
+  transform: translateY(-100%);
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.header_style {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  background-color: #f0a500;
+}
+
+.img-logo {
+  height: 100px;
+  width: auto;
+}
+
+.active-spa {
+  color: white !important;
+  border-radius: 0px !important;
+  /* background-color: #f0a500; */
+  border-bottom: 2px solid #f0a500;
+  /* color: #f0a500 !important; */
+}
+
+.logo {
+  float: left;
+  height: 100px;
+  margin-left: 10px;
+  position: absolute;
+  text-align: center;
+  transition: width 0.5s, height 0.5s;
+  width: 150px;
+  z-index: 2;
+}
+
+.profile-menu {
+  height: 40px;
+}
+
+.tx-profilemenu {
+  float: right;
+  margin: 0 5px;
+  height: 35px;
+}
+
+.navigation {
+  margin-left: 0px;
+  height: 60px;
+}
+
+.update-spa-icon {
+  font-size: x-large;
+  position: absolute;
+}
+
+.hide-field {
+  display: none !important;
+}
+
+#add-user-scroll {
+  float: right;
+}
+
+.update-spa-icon:hover {
+  font-size: xx-large;
+  transition: all 0.5s;
+}
+
+.message-mouseover {
+  display: inline-block;
+}
+
+#dropdownMenuButton {
+  height: 33px;
+  margin-top: 0px;
+  background-color: transparent !important;
+  /* border:1px solid white; */
+  width: 250px;
+  border-radius: 2px;
+  box-shadow: none !important;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #f0a500;
+}
+.dropdown-menu {
+  width: 200px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: white;
+  text-align: left;
+  list-style: none;
+  background-color: #1b262c; /* Fallback color */
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.imagen {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-brand {
+  text-align: center;
+  width: 100%;
+  font-family: "Roboto Condensed", sans-serif;
+  color: white;
+}
+
+.navbar-toggler-icon {
+  color: white;
+}
+
+.bell_icon {
+  margin-top: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+}
