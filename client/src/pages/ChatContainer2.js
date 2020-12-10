@@ -21,6 +21,30 @@ export default function ChatContainer() {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
+            const getFriendList = async () => {
+                try {
+                    const data = {
+                        role: parseInt(resources_controller.GetSession("role")),
+                        row_id: parseInt(resources_controller.GetSession("row_id"))
+                    };
+                    const res = await axios.post(config.QUERY_SERVER_URI + `api/chat/user/getFriendList`, data, {
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+        
+                    if (res.data.status === "error") {
+                        validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
+                    } else {
+                        setfriendList(res.data)
+                    }
+        
+                } catch (error) {
+                    validations.ErrorToast("Ha ocurrido un error", error.message)
+                }
+            }
+            
             getFriendList()
         }
     }, [])
@@ -80,30 +104,6 @@ export default function ChatContainer() {
                 validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
             } else {
                 setMessages(res.data)
-            }
-
-        } catch (error) {
-            validations.ErrorToast("Ha ocurrido un error", error.message)
-        }
-    }
-
-    const getFriendList = async () => {
-        try {
-            const data = {
-                role: parseInt(resources_controller.GetSession("role")),
-                row_id: parseInt(resources_controller.GetSession("row_id"))
-            };
-            const res = await axios.post(config.QUERY_SERVER_URI + `api/chat/user/getFriendList`, data, {
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            if (res.data.status === "error") {
-                validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
-            } else {
-                setfriendList(res.data)
             }
 
         } catch (error) {
