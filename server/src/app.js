@@ -27,7 +27,7 @@ app.use('/api/chat/user', require('./routes/chat'));
 app.use('/api/alerts/user', require('./routes/alerts'));
 
 //SETTINGS
-app.set('port', config.API_PORT || 4000);
+app.set('port', process.env.PORT || config.API_PORT);
 app.set('socketIo', io);
 app.set('server', server);
 
