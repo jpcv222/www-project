@@ -1,3 +1,15 @@
 .img_car{
-    max-height: 450px !important;
+    max-height: 550px !important;
+}
+
+.carousel-indicators li {
+    background-color: gray;
+}
+
+.carousel .carousel-control-next-icon {
+    background-color: gray;
+}
+
+.carousel .carousel-control-prev-icon {
+    background-color: gray;
 }

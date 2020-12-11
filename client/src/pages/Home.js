@@ -8,12 +8,37 @@ import axios from 'axios'
 
 import Map from '../components/PatientsMap'
 import DataTable from '../components/DataTable'
+import Carousel from '../components/Carousel'
+
+// Imagenes slider
+import mascarilla from '../images/mascarilla.jpg'
+import manos from '../images/manos.jpg'
+import safety_suit from '../images/safety-suit.svg'
+import distancia from '../images/distancia.jpg'
 
 const config = require('../config/config');
+
+const images = [
+    {
+        id: 4,
+        image: distancia,
+        description: "distancia"
+    },
+    {
+        id: 2,
+        image: mascarilla,
+        description: "Como poner mascarilla"
+    }, {
+        id: 3,
+        image: manos,
+        description: "Como lavar manos"
+    }
+
+]
 export default class Home extends React.Component {
     state = {
         patients: [],
-        datatable:{},
+        datatable: {},
         checkbox: {},
     }
 
@@ -21,7 +46,7 @@ export default class Home extends React.Component {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
-            
+
             // socket.emit('connection', { row_id: parseInt(resources_controller.GetSession("row_id")) })
             if (parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) {
                 await this.GetPatients();
@@ -90,7 +115,7 @@ export default class Home extends React.Component {
                                 label: 'Nombre',
                                 field: 'name',
                                 width: 270,
-                            },                        
+                            },
                             {
                                 label: 'Mensaje de alerta',
                                 field: 'content',
@@ -143,6 +168,31 @@ export default class Home extends React.Component {
                             check={false}
                         />
                     </React.Fragment>
+                }
+                {parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.PACIENTE &&
+                    <React.Fragment>
+                        <div className="row " >
+                            <div className="col-lg-11 col-md-11 col-sm-12 col-xs-12 mb-1">
+                                <p class="h3">Recomendaciones de bioseguridad</p>
+                            </div>
+                            {/* <div className="col-lg-1 col-md-1 col-sm-12 col-xs-12 mb-1">
+                                <img src={safety_suit} alt="..." class="img-thumbnail"></img>
+                            </div> */}
+
+                        </div>
+                        <hr></hr>
+                        <Carousel
+                            images={images}
+                        />
+                    </React.Fragment>
+
+                }
+
+                {parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.SUPER_USER &&
+                    <React.Fragment>
+                        
+                    </React.Fragment>
+
                 }
             </React.Fragment>
         )
