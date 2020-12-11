@@ -41,20 +41,27 @@ class Navbar extends React.Component {
                     <div className="navbar-nav nav-pills">
                         {resources_controller.GetSession("token") &&
                             <React.Fragment>
-                                <Link className="nav-bar-item nav-item nav-link active-spa navbar_link" to="/Home" id="Home">Inicio</Link>
-                                {(parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.SUPER_USER ||
+
+                                {(parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.PACIENTE ||
                                     parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) ?
+                                    <React.Fragment>
+                                        <Link className="nav-bar-item nav-item nav-link active-spa navbar_link" to="/Home" id="Home">Inicio</Link>
+                                        <Link className="nav-bar-item nav-item nav-link navbar_link" to="/Chat" id="Chat">Chat</Link>
+                                    </React.Fragment>
+                                    :
+                                    null
+                                }
+
+                                {parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.SUPER_USER ?
                                     <Link className="nav-bar-item nav-item nav-link navbar_link" to="/UserManagement" id="UserManagement">Gestion Usuarios</Link>
                                     :
                                     null
                                 }
-                                {(parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.PACIENTE ||
-                                    parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) ?
-                                    <Link className="nav-bar-item nav-item nav-link navbar_link" to="/Chat" id="Chat">Chat</Link>
+                                {parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR ?
+                                    <Link className="nav-bar-item nav-item nav-link navbar_link" to="/UserManagement" id="UserManagement">Gestion Pacientes</Link>
                                     :
                                     null
                                 }
-                                
 
 
 
