@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import Map from '../components/PatientsMap'
 import DataTable from '../components/DataTable'
+import Card from '../components/Card'
 import Carousel from '../components/Carousel'
 
 // Imagenes slider
@@ -40,6 +41,9 @@ export default class Home extends React.Component {
         patients: [],
         datatable: {},
         checkbox: {},
+        datatable_logs: {},
+        cant_patients: 0,
+        cant_alerts: 0
     }
 
     async componentDidMount() {
@@ -51,7 +55,98 @@ export default class Home extends React.Component {
             if (parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.DOCTOR) {
                 await this.GetPatients();
                 await this.GetPatientsAlerts();
+                await this.GetLogs();
             }
+        }
+    }
+
+    GetCantAlerts = async () => {
+        try {
+            const data = this.state.datatable.rows;
+            const count = data.length;
+
+            console.log(count);
+
+            this.setState({
+                cant_alerts: count
+            });
+
+
+        } catch (error) {
+            validations.ErrorToast("Ha ocurrido un error", error.message)
+        }
+    }
+
+    GetCantPatients = async () => {
+        try {
+            const data = this.state.patients;
+            const count = data.length;
+
+            this.setState({
+                cant_patients: count
+            });
+
+            console.log(this.state.cant_patients)
+
+        } catch (error) {
+            validations.ErrorToast("Ha ocurrido un error", error.message)
+        }
+    }
+
+    GetLogs = async () => {
+        try {
+            const data = {};
+            data.role = resources_controller.GetSession("role");
+            data.row_id = resources_controller.GetSession("row_id");
+
+            const res = await axios.post(config.QUERY_SERVER_URI + `api/user/manage/getLogs`, data, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Bearer ${this.state.token}`
+                }
+            });
+
+            if (res.data.status === "error") {
+                validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
+            } else {
+                const data = res.data;
+                resources_controller.CambiarFechaJson("last_login", data);
+                console.log(data);
+
+                this.setState({
+                    datatable_logs: {
+                        columns: [
+
+                            {
+                                label: 'Identificacion',
+                                field: 'identification',
+                                width: 270,
+                            },
+                            {
+                                label: 'Nombre',
+                                field: 'name',
+                                width: 270,
+                            },
+                            {
+                                label: 'Inicios de sesión',
+                                field: 'login_count',
+                                width: 270,
+                            },
+                            {
+                                label: 'Último login',
+                                field: 'last_login',
+                                width: 270,
+                            }
+                        ],
+                        rows: data
+                    }
+                });
+            }
+
+            await this.GetCantAlerts();
+
+        } catch (error) {
+            validations.ErrorToast("Ha ocurrido un error", error.message)
         }
     }
 
@@ -71,15 +166,19 @@ export default class Home extends React.Component {
             if (res.data.status === "error") {
                 validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
             } else {
+
                 this.setState({
                     patients: res.data
                 })
+
+                await this.GetCantPatients();
             }
 
         } catch (error) {
             validations.ErrorToast("Ha ocurrido un error", error.message)
         }
     }
+
     GetPatientsAlerts = async () => {
         try {
             const data = {};
@@ -97,6 +196,7 @@ export default class Home extends React.Component {
                 validations.ErrorToast(res.data.description, res.data.traza, res.data.id);
             } else {
                 const data = res.data;
+                console.log(data);
                 resources_controller.CambiarFechaJson("ts_creation", data)
                 this.setState({
                     datatable: {
@@ -167,6 +267,43 @@ export default class Home extends React.Component {
                             onCheckboxChange={this.onCheckboxChange}
                             check={false}
                         />
+
+                        <div className="row">
+                            <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12 mb-1">
+                                <hr></hr>
+                                <p class="h2">Reporte de sesiones</p>
+                                <DataTable
+                                    datatable={this.state.datatable_logs}
+                                    onCheckboxChange={this.onCheckboxChange}
+                                    check={false}
+                                />
+                            </div>
+
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-1">
+                                <hr></hr>
+                                <p class="h2">Reportes estadísticos</p>
+                                <center>
+                                <Card
+                                    title = "Cantidad de pacientes"
+                                    value={this.state.cant_patients}
+                                    description="Cantidad de pacientes asignados al médico actual"
+                                />
+                                </center>
+
+                                <center>
+                                <Card
+                                    title = "Cantidad de alertas"
+                                    value={this.state.cant_alerts}
+                                    description="Cantidad de alertas que han sido registradas por los pacientes asignados al médico actual"
+                                />
+                                </center>
+                                
+                            </div>
+                        </div>
+
+
+
+
                     </React.Fragment>
                 }
                 {parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.PACIENTE &&
