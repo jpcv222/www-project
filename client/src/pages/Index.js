@@ -90,7 +90,12 @@ export default class Index extends Component {
                                 validations.ErrorToast("Ha ocurrido un error", err.message)
                             } else {
                                 resources_controller.SetSession(decoded);
-                                window.location.href = '/Home'
+                                if ((parseInt(resources_controller.GetSession("role")) === resources_controller.USER_ROL_NUMBER.SUPER_USER)) {
+                                    window.location.href = '/UserManagement'
+                                }else{
+                                    window.location.href = '/Home'
+                                }
+                                
                                 resources_controller.ModifySession("latitude", "");
                                 resources_controller.ModifySession("longitude", "");
                             }
